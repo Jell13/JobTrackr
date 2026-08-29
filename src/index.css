@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* ---- Fonts ---- */
+  --font-heading: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
+ 
+  /* ---- Accent (Indigo — the mockup's default theme) ---- */
+  --color-accent: #4F46E5;
+  --color-accent-hover: #4338CA;
+  --color-accent-tint: #EEF2FF;
+  --color-accent-tint-border: #C7D2FE;
+  --color-accent-dark: #241F45; /* login panel background */
+ 
+  /* ---- Neutrals / surfaces ---- */
+  --color-bg-page: #F8F9FC;
+  --color-bg-surface: #FFFFFF;
+  --color-bg-muted: #F1F2F6;
+  --color-border: #E7E8F0;
+  --color-border-strong: #E5E7EB;
+ 
+  /* ---- Text ---- */
+  --color-text-primary: #1E1B2E;
+  --color-text-secondary: #6B7280;
+  --color-text-muted: #9CA3AF;
+ 
+  /* ---- Pipeline status colors (Kanban columns + badges) ---- */
+  --color-status-wishlist: #94A3B8;
+  --color-status-wishlist-bg: #F1F5F9;
+  --color-status-wishlist-text: #475569;
+  --color-status-wishlist-border: #CBD5E1;
+ 
+  --color-status-applied: #3B82F6;
+  --color-status-applied-bg: #EFF6FF;
+  --color-status-applied-text: #1D4ED8;
+  --color-status-applied-border: #BFDBFE;
+ 
+  --color-status-interviewing: #F59E0B;
+  --color-status-interviewing-bg: #FFFBEB;
+  --color-status-interviewing-text: #B45309;
+  --color-status-interviewing-border: #FDE68A;
+ 
+  --color-status-offer: #10B981;
+  --color-status-offer-bg: #ECFDF5;
+  --color-status-offer-text: #047857;
+  --color-status-offer-border: #A7F3D0;
+ 
+  --color-status-rejected: #F43F5E;
+  --color-status-rejected-bg: #FFF1F2;
+  --color-status-rejected-text: #BE123C;
+  --color-status-rejected-border: #FECDD3;
+ 
+  /* ---- Avatar palette (company-initial chips, assign in fixed order) ---- */
+  --color-avatar-1-bg: #EEF2FF; --color-avatar-1-text: #4F46E5;
+  --color-avatar-2-bg: #FFF7ED; --color-avatar-2-text: #C2410C;
+  --color-avatar-3-bg: #ECFDF5; --color-avatar-3-text: #047857;
+  --color-avatar-4-bg: #FDF2F8; --color-avatar-4-text: #BE185D;
+  --color-avatar-5-bg: #EFF6FF; --color-avatar-5-text: #1D4ED8;
+  --color-avatar-6-bg: #F5F3FF; --color-avatar-6-text: #6D28D9;
+ 
+  /* ---- Radius ---- */
+  --radius-control: 8px;
+  --radius-card: 10px;
+  --radius-panel: 12px;
+  --radius-modal: 16px;
+  --radius-pill: 20px;
+ 
+  /* ---- Shadow ---- */
+  --shadow-card: 0 1px 2px rgba(16, 24, 40, 0.04);
+  --shadow-card-hover: 0 4px 14px rgba(16, 24, 40, 0.10);
+  --shadow-modal: 0 20px 60px rgba(0, 0, 0, 0.25);
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text-primary);
+  background: var(--color-bg-page);
+}
+ 
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  margin: 0;
+}
+ 
+/* Card hover lift, used on Kanban cards */
+.kanban-card {
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.kanban-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-1px);
+}
+ 
+/* Primary CTA hover, theme-agnostic so it works with any accent above */
+.btn-primary:hover {
+  filter: brightness(0.9);
+}
