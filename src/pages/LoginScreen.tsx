@@ -2,6 +2,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
+import Logo from "../components/Logo";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID as string;
@@ -51,16 +52,7 @@ const LoginScreen = () => {
           <div className="absolute w-75 h-75 rounded-full bg-[#FFFFFF0F] -left-32 -bottom-36" />
 
           <div className="flex flex-col justify-between h-full w-full gap-5">
-            <div className="flex gap-2 items-center">
-              <div className="w-7 h-7 rounded-md bg-avatar-1-text flex justify-center items-center">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-                  <rect x="3" y="10" width="4" height="11" rx="1" fill="white" />
-                  <rect x="10" y="5" width="4" height="16" rx="1" fill="white" />
-                  <rect x="17" y="13" width="4" height="8" rx="1" fill="white" />
-                </svg>
-              </div>
-              JobTrackr
-            </div>
+            <Logo/>
 
             <div className="">
               <div className="flex flex-col">
