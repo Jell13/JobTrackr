@@ -16,7 +16,7 @@ const DragArea = ({applications, updateApplicationState} : DragAreaType) => {
           updateApplicationState(draggedId, targetStageId);
         }
     }}>
-      <div className="p-6">
+      <div className="py-6">
         <div className="grid grid-cols-5 gap-5">
           {stages.map((stage) => (
             <Droppable key={stage.id} id={stage.id}>

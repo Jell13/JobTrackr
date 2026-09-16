@@ -10,6 +10,7 @@ const AppLayout = () => {
   const [applications, setApplications] = useState<JobApplicationCard[]>([])
 
   const addApplication = (data: Omit<JobApplicationCard, "id">) => {
+      console.log(data);
       setApplications((prev) => [...prev, {...data, id: crypto.randomUUID()}])
   }
 
@@ -20,7 +21,7 @@ const AppLayout = () => {
     <>
         <BoardNavbar onNewApplication={() => setModalOpen(true)}/>
         <Outlet context={{ applications, updateApplicationStage }} />
-        {isModalOpen && <NewApplicationModal onClose={ () => setModalOpen(false)} onSubmit={() => addApplication}/> }
+        {isModalOpen && <NewApplicationModal onClose={ () => setModalOpen(false)} onSubmit={addApplication}/> }
     </>
   )
 }

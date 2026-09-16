@@ -5,13 +5,17 @@ import { stages } from "../lib/consts";
 const NewApplicationModal = ({ onClose, onSubmit }: NewApplicationModalProps) => {
   const [company, setCompany] = useState("");
   const [position, setPosition] = useState("");
-  const [stageId, setStageId] = useState("");
+  const [stageId, setStageId] = useState(stages[0].id);
   const [description, setDescription] = useState("");
 
   const handleSubmit = (e : any) => {
     e.preventDefault();
     if (!company.trim() || !position.trim()) return;
-    onSubmit({ company, position, stageId, description });
+
+    console.log(company);
+    console.log(position);
+    console.log(description);
+    onSubmit({ company : company, position: position, stageId: stageId, description: description });
     onClose();
   }
   return (
