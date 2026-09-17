@@ -4,20 +4,19 @@ import { stages } from "../lib/consts";
 
 const NewApplicationModal = ({ onClose, onSubmit }: NewApplicationModalProps) => {
   const [company, setCompany] = useState("");
-  const [position, setPosition] = useState("");
-  const [stageId, setStageId] = useState(stages[0].id);
+  const [role, setRole] = useState("");
+  const [status, setStatus] = useState(stages[0].id);
   const [description, setDescription] = useState("");
+  const [appliedDate, setAppliedDate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
 
-  const handleSubmit = (e : any) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!company.trim() || !position.trim()) return;
-
-    console.log(company);
-    console.log(position);
-    console.log(description);
-    onSubmit({ company : company, position: position, stageId: stageId, description: description });
+    onSubmit({ company, role, status, description, appliedDate });
     onClose();
-  }
+  };
+
   return (
     <div
       className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
@@ -30,10 +29,7 @@ const NewApplicationModal = ({ onClose, onSubmit }: NewApplicationModalProps) =>
         <h3 className="text-xl font-semibold mb-4">New Application</h3>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="company"
-              className="text-sm font-medium text-text-secondary"
-            >
+            <label htmlFor="company" className="text-sm font-medium text-text-secondary">
               Company
             </label>
             <input
@@ -45,25 +41,19 @@ const NewApplicationModal = ({ onClose, onSubmit }: NewApplicationModalProps) =>
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="position"
-              className="text-sm font-medium text-text-secondary"
-            >
+            <label htmlFor="role" className="text-sm font-medium text-text-secondary">
               Position
             </label>
             <input
-              id="position"
-              value={position}
-              onChange={(e) => setPosition(e.target.value)}
+              id="role"
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
               className="border border-border rounded-lg px-3 py-2"
               placeholder="e.g. Frontend Developer"
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="description"
-              className="text-sm font-medium text-text-secondary"
-            >
+            <label htmlFor="description" className="text-sm font-medium text-text-secondary">
               Description
             </label>
             <textarea
@@ -75,19 +65,28 @@ const NewApplicationModal = ({ onClose, onSubmit }: NewApplicationModalProps) =>
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="stage"
-              className="text-sm font-medium text-text-secondary"
-            >
+            <label htmlFor="appliedDate" className="text-sm font-medium text-text-secondary">
+              Applied Date
+            </label>
+            <input
+              id="appliedDate"
+              type="date"
+              value={appliedDate}
+              onChange={(e) => setAppliedDate(e.target.value)}
+              className="border border-border rounded-lg px-3 py-2"
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label htmlFor="stage" className="text-sm font-medium text-text-secondary">
               Status
             </label>
             <select
               id="stage"
-              value={stageId}
-              onChange={(e) => setStageId(e.target.value)}
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
               className="border border-border rounded-lg px-3 py-2"
             >
-              {stages  .map((stage) => (
+              {stages.map((stage) => (
                 <option key={stage.id} value={stage.id}>
                   {stage.name}
                 </option>

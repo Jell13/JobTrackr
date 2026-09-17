@@ -4,10 +4,9 @@ import { useOutletContext } from "react-router-dom";
 import type { BoardContext } from "../lib/types";
 
 const Board = () => {
+
   const { applications, updateApplicationStage } =
     useOutletContext<BoardContext>();
-
-    console.log(applications)
 
   return (
     <section>

@@ -23,7 +23,8 @@ const LoginScreen = () => {
       });
       if (!response.ok) {
         const body = await response.json();
-        throw new Error("Error:", body)
+        console.error(body);
+        throw new Error("Google login failed");
       };
       const data = await response.json();
       localStorage.setItem("token", data.token);

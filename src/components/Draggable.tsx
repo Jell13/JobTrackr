@@ -2,7 +2,7 @@ import { useDraggable } from "@dnd-kit/react";
 import type { ReactNode } from "react";
 
 type DraggableProps = {
-  id: string;
+  id: number;
   children: ReactNode;
 };
 
