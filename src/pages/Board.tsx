@@ -5,7 +5,7 @@ import type { BoardContext } from "../lib/types";
 
 const Board = () => {
 
-  const { applications, updateApplicationStage } =
+  const { applications, updateApplicationStage, onSelectApplication } =
     useOutletContext<BoardContext>();
 
   return (
@@ -21,6 +21,7 @@ const Board = () => {
           <DragArea
             applications={applications}
             updateApplicationState={updateApplicationStage}
+            onSelectApplication={onSelectApplication}
           />
         </div>
       </div>

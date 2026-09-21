@@ -4,7 +4,8 @@ import Droppable from "./Droppable";
 import type { DragAreaType } from "../lib/types";
 import Draggable from "./Draggable";
 
-const DragArea = ({ applications, updateApplicationState }: DragAreaType) => {
+const DragArea = ({ applications, updateApplicationState, onSelectApplication }: DragAreaType) => {
+
   return (
     <DragDropProvider
       onDragEnd={(e) => {
@@ -25,7 +26,7 @@ const DragArea = ({ applications, updateApplicationState }: DragAreaType) => {
                 {applications
                   .filter((app) => app.status === stage.id)
                   .map((app) => (
-                    <Draggable key={app.id} id={app.id}>
+                    <Draggable key={app.id} id={app.id} onClick={() => onSelectApplication(app)}>
                       <p className="font-medium">{app.role}</p>
                       <p className="text-sm text-text-secondary">{app.company}</p>
                     </Draggable>

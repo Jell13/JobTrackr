@@ -42,3 +42,12 @@ export const updateApplicationStatus = async (id: number, status: string) => {
 
     if(!res.ok) throw new Error("Failed to update application status");
 }
+
+export const deleteApplication = async (id: number) => {
+    const res = await fetch(`${API_BASE_URL}/api/applications/${id}`,{
+        method: "DELETE",
+        headers: authHeaders()
+    })
+
+    if (!res.ok) throw new Error("Failed to delete the application");
+}

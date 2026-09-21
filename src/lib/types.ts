@@ -21,9 +21,21 @@ export type NewApplicationModalProps = {
 export type BoardContext = {
   applications: JobApplicationCard[];
   updateApplicationStage: (id: number, status: string) => void;
+  onSelectApplication: (app: JobApplicationCard) => void;
 };
 
 export type DragAreaType = {
   applications: JobApplicationCard[];
   updateApplicationState: (id: number, status: string) => void;
+  onSelectApplication: (app: JobApplicationCard) => void;
 };
+
+export type DroppableType = {
+  id: string;
+  children: any;
+}
+
+export type ApplicationDetailType = {
+  application: JobApplicationCard;
+  onClose: () => void;
+}
