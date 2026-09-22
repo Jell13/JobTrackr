@@ -3,6 +3,7 @@ import { FaGithub } from "react-icons/fa";
 import { useGoogleLogin } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import Logo from "../components/Logo";
+import { setTokens } from "../lib/auth";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 const GITHUB_CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID as string;
@@ -27,7 +28,7 @@ const LoginScreen = () => {
         throw new Error("Google login failed");
       };
       const data = await response.json();
-      localStorage.setItem("token", data.token);
+      setTokens(data.accessToken, data.refreshToken);
       navigate("/board");
     } catch (err) {
       console.error(err);
