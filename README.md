@@ -2,8 +2,7 @@
 
 The React frontend for JobTrackr, a job application tracker with a drag-and-drop Kanban board. This repo is the client application; it talks to a separate ASP.NET Core Web API backend for authentication and data.
 
-**Live demo:** [add your Vercel URL here once deployed]
-**Backend repo:** [add link to your JobTrackrAPI repo here]
+**Backend repo:** https://github.com/Jell13/JobTrackrAPI
 
 ## Table of Contents
 
@@ -49,7 +48,7 @@ This is the client-side application for JobTrackr. Users sign in with Google or 
 ### Setup
 
 ```bash
-git clone https://github.com/<your-username>/jobtrackr-frontend.git
+git clone https://github.com/Jell13/jobtrackr-frontend.git
 cd jobtrackr-frontend
 npm install
 ```
@@ -87,7 +86,7 @@ Every API call includes a JWT access token in the `Authorization` header, retrie
 
 ## Deployment
 
-This app is deployed to [Vercel](https://vercel.com) as a static Vite build. The `VITE_API_URL` environment variable is set in the Vercel project settings to point at the deployed backend.
+This app is not deployed yet
 
 ## Roadmap
 
