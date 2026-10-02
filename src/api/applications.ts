@@ -1,10 +1,10 @@
-import { authHeaders } from "./clients";
+import { apiFetch, authHeaders } from "./clients";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 export const getAllApplications = async () => {
 
-    const res = await fetch(`${API_BASE_URL}/api/applications`, {
+    const res = await apiFetch(`${API_BASE_URL}/api/applications`, {
         headers: authHeaders()
     })
 
@@ -21,7 +21,7 @@ export const createApplication = async (data: {
     appliedDate: string
 }) => {
 
-    const res = await fetch(`${API_BASE_URL}/api/applications`, {
+    const res = await apiFetch(`${API_BASE_URL}/api/applications`, {
         method: "POST",
         headers: authHeaders(),
         body: JSON.stringify(data)
@@ -33,18 +33,22 @@ export const createApplication = async (data: {
 }
 
 export const updateApplicationStatus = async (id: number, status: string) => {
-     
-    const res = await fetch(`${API_BASE_URL}/api/applications/${id}`,{
+
+    const res = await apiFetch(`${API_BASE_URL}/api/applications/${id}`, {
         method: "PATCH",
         headers: authHeaders(),
         body: JSON.stringify({status})
-    })
+    });
 
-    if(!res.ok) throw new Error("Failed to update application status");
+    if (!res.ok){
+        throw new Error("Failed to fetch applications.");
+    }
+
+    return res.json();
 }
 
 export const deleteApplication = async (id: number) => {
-    const res = await fetch(`${API_BASE_URL}/api/applications/${id}`,{
+    const res = await apiFetch(`${API_BASE_URL}/api/applications/${id}`,{
         method: "DELETE",
         headers: authHeaders()
     })

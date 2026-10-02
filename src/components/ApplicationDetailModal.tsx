@@ -12,14 +12,15 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
 
   return (
     <div
-      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4 overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="bg-bg-surface rounded-xl p-6 w-full max-w-md flex flex-col gap-5"
+        className="bg-bg-surface rounded-xl w-full max-w-md max-h-[85vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between">
+        {/* Header: never scrolls, always visible */}
+        <div className="flex items-start justify-between p-6 pb-4">
           <div>
             <h3 className="text-xl font-semibold">{application.company}</h3>
             <p className="text-sm text-text-secondary">{application.role}</p>
@@ -33,27 +34,31 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
           </button>
         </div>
 
-        <div className="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Status</p>
-            <p className="font-medium capitalize">{application.status}</p>
+        {/* Body: this is the part that scrolls if content is too tall */}
+        <div className="flex flex-col gap-5 px-6 overflow-y-auto">
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div>
+              <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Status</p>
+              <p className="font-medium capitalize">{application.status}</p>
+            </div>
+            <div>
+              <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Applied</p>
+              <p className="font-medium">{application.appliedDate}</p>
+            </div>
           </div>
-          <div>
-            <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Applied</p>
-            <p className="font-medium">{application.appliedDate}</p>
-          </div>
+
+          {application.description && (
+            <div>
+              <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Description</p>
+              <p className="text-sm text-text-secondary whitespace-pre-line pb-5">
+                {application.description}
+              </p>
+            </div>
+          )}
         </div>
 
-        {application.description && (
-          <div>
-            <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Description</p>
-            <p className="text-sm text-text-secondary whitespace-pre-line">
-              {application.description}
-            </p>
-          </div>
-        )}
-
-        <div className="pt-2 border-t border-border">
+        {/* Footer: never scrolls, always visible */}
+        <div className="p-6 pt-4 border-t border-border">
           {!confirmingDelete ? (
             <button
               type="button"
