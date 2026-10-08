@@ -6,6 +6,19 @@ export const navigations = [
     },
 ]
 
+export const homeNav = [
+    {
+        id: 1,
+        link: "#features",
+        name: "Features"
+    },
+    {
+        id: 2,
+        link: "#HowItWorks",
+        name: "How it works"
+    }
+]
+
 export const stages = [
   { id: "wishlist", name: "Wishlist" },
   { id: "applied", name: "Applied" },
