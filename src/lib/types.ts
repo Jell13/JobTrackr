@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export type JobApplicationCard = {
   id: number;
   company: string;
@@ -30,9 +32,12 @@ export type DragAreaType = {
   onSelectApplication: (app: JobApplicationCard) => void;
 };
 
-export type DroppableType = {
+export interface DroppableType {
   id: string;
-  children: any;
+  label: string;
+  count: number;
+  accentColor: string;
+  children: ReactNode;
 }
 
 export type ApplicationDetailType = {

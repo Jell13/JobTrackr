@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { JobApplicationCard } from "../lib/types";
+import { getSponsorshipInsight } from "../api/sponsoship";
 
 type ApplicationDetailModalProps = {
   application: JobApplicationCard;
@@ -9,6 +10,32 @@ type ApplicationDetailModalProps = {
 
 const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationDetailModalProps) => {
   const [confirmingDelete, setConfirmingDelete] = useState(false);
+  const [sponsorshipInsight, setSponsorshipInsight] = useState<string | null>(null);
+  const [loadingInsight, setLoadingInsight] = useState(true);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    setLoadingInsight(true);
+    setSponsorshipInsight(null);
+
+    getSponsorshipInsight(application.company)
+      .then((data) => {
+        if (!cancelled) setSponsorshipInsight(data.insight);
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setSponsorshipInsight("Couldn't load sponsorship info for this employer right now.");
+        }
+      })
+      .finally(() => {
+        if (!cancelled) setLoadingInsight(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [application.company]);
 
   return (
     <div
@@ -19,7 +46,6 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
         className="bg-bg-surface rounded-xl w-full max-w-md max-h-[85vh] flex flex-col"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Header: never scrolls, always visible */}
         <div className="flex items-start justify-between p-6 pb-4">
           <div>
             <h3 className="text-xl font-semibold">{application.company}</h3>
@@ -34,7 +60,6 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
           </button>
         </div>
 
-        {/* Body: this is the part that scrolls if content is too tall */}
         <div className="flex flex-col gap-5 px-6 overflow-y-auto">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
@@ -47,6 +72,19 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
             </div>
           </div>
 
+          <div>
+            <p className="text-text-muted text-xs uppercase tracking-wide mb-1">
+              H-1B Sponsorship Insight
+            </p>
+            {loadingInsight ? (
+              <p className="text-sm text-text-secondary italic">Checking sponsorship history...</p>
+            ) : (
+              <p className="text-sm text-text-secondary whitespace-pre-line">
+                {sponsorshipInsight}
+              </p>
+            )}
+          </div>
+
           {application.description && (
             <div>
               <p className="text-text-muted text-xs uppercase tracking-wide mb-1">Description</p>
@@ -57,7 +95,6 @@ const ApplicationDetailModal = ({ application, onClose, onDelete }: ApplicationD
           )}
         </div>
 
-        {/* Footer: never scrolls, always visible */}
         <div className="p-6 pt-4 border-t border-border">
           {!confirmingDelete ? (
             <button
